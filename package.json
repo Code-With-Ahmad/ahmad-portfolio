@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "seed:skills": "node scripts/seed-skills.js"
+    "seed:skills": "node scripts/seed-skills.js",
+    "seed:experience": "node scripts/seed-experience.js"
   },
   "dependencies": {
     "cloudinary": "^2.11.0",
