@@ -30,7 +30,7 @@ export default function Hero({ number }) {
             <span>{site.title}</span>
           </div>
           {site.availability && (
-            <span className="flex items-center gap-2 pl-11 sm:pl-0">
+            <span className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 flex-none rounded-full bg-accent" />
               {site.availability}
             </span>
