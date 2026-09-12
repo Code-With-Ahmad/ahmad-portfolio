@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  --font-display: "Instrument Serif", "Iowan Old Style", serif;
+  --font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Dark theme (default) */
+  --color-bg: #0b0b0c;
+  --color-bg-elevated: #151516;
+  --color-ink: #f3efe7;
+  --color-ink-muted: #96918a;
+  --color-border: #262625;
+  --color-accent: #d8a657;
+  --color-accent-ink: #14110a;
+  --color-error: #d16652;
+}
+
+:root[data-theme="light"] {
+  --color-bg: #f5f2ea;
+  --color-bg-elevated: #ffffff;
+  --color-ink: #16140f;
+  --color-ink-muted: #6e685c;
+  --color-border: #e1dac9;
+  --color-accent: #a8722c;
+  --color-accent-ink: #fbf7ef;
+  --color-error: #b8452f;
+}
+
+@theme inline {
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+
+  --color-bg: var(--color-bg);
+  --color-bg-elevated: var(--color-bg-elevated);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-accent-ink: var(--color-accent-ink);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    transition: background-color 400ms ease, color 400ms ease;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  html.custom-cursor-active,
+  html.custom-cursor-active a,
+  html.custom-cursor-active button {
+    cursor: none;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /* Native <select> dropdown popups don't inherit page CSS variables in
+     most browsers unless colors are set explicitly on the elements
+     themselves — without this, option lists render with default (light)
+     OS colors even in dark theme. */
+  select, option {
+    background-color: var(--color-bg-elevated);
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* react-toastify overrides — the library's default look (rounded corners,
+   drop shadow, its own color scheme) doesn't match the site's restrained,
+   sharp-edged aesthetic, so it's restyled to use the same tokens as
+   everything else instead of introducing a visually distinct UI system. */
+.Toastify__toast {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 1px solid var(--color-border) !important;
+  background-color: var(--color-bg-elevated) !important;
+  color: var(--color-ink) !important;
+  font-family: var(--font-sans) !important;
+  padding: 0.5rem 0.75rem !important;
+  min-height: unset !important;
+}
+
+.Toastify__toast-body {
+  font-size: 14px !important;
+  padding: 0.25rem 0.25rem !important;
+  color: var(--color-ink) !important;
+}
+
+.Toastify__toast--success {
+  border-left: 3px solid var(--color-accent) !important;
+}
+
+.Toastify__toast--error {
+  border-left: 3px solid var(--color-error) !important;
+}
+
+.Toastify__toast-icon {
+  display: none !important;
+}
+
+.Toastify__close-button {
+  color: var(--color-ink-muted) !important;
+  opacity: 1 !important;
+  align-self: center !important;
+}
+
+.Toastify__progress-bar--wrp {
+  display: none !important;
+}
+
+.Toastify__close-button:hover {
+  color: var(--color-ink);
+}
