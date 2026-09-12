@@ -6,6 +6,7 @@ import Tag from '@/components/ui/Tag';
 import Loader from '@/components/ui/Loader';
 import Seo from '@/components/layout/Seo';
 import Container from '@/components/ui/Container';
+import { cloudinaryUrl } from '@/lib/utils';
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -95,7 +96,11 @@ export default function ProjectDetail() {
 
       {project.coverImageUrl && (
         <div className="mt-14 aspect-[16/9] w-full overflow-hidden border border-border">
-          <img src={project.coverImageUrl} alt={project.title} className="h-full w-full object-cover" />
+          <img
+            src={cloudinaryUrl(project.coverImageUrl, 'q_auto,f_auto,w_1400')}
+            alt={project.title}
+            className="h-full w-full object-cover"
+          />
         </div>
       )}
 
@@ -113,7 +118,11 @@ export default function ProjectDetail() {
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {project.images.map((src, i) => (
             <div key={i} className="aspect-[4/3] overflow-hidden border border-border">
-              <img src={src} alt={`${project.title} screenshot ${i + 1}`} className="h-full w-full object-cover" />
+              <img
+                src={cloudinaryUrl(src, 'q_auto,f_auto,w_900')}
+                alt={`${project.title} screenshot ${i + 1}`}
+                className="h-full w-full object-cover"
+              />
             </div>
           ))}
         </div>

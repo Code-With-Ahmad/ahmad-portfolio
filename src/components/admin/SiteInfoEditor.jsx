@@ -18,6 +18,15 @@ const emptySiteForm = {
   logoUrl: '',
   faviconUrl: '',
   socials: { github: '', linkedin: '', x: '' },
+  aboutEyebrow: '',
+  skillsEyebrow: '',
+  skillsTitle: '',
+  experienceEyebrow: '',
+  experienceTitle: '',
+  projectsEyebrow: '',
+  projectsTitle: '',
+  contactEyebrow: '',
+  contactTitle: '',
 };
 
 const FIELD_CLASS =
@@ -126,6 +135,53 @@ export default function SiteInfoEditor() {
           <Field label="GitHub URL" value={form.socials?.github} onChange={(v) => setSocial('github', v)} />
           <Field label="LinkedIn URL" value={form.socials?.linkedin} onChange={(v) => setSocial('linkedin', v)} />
           <Field label="X / Twitter URL" value={form.socials?.x} onChange={(v) => setSocial('x', v)} />
+        </div>
+
+        <div className="mt-4 border-t border-border pt-8">
+          <h2 className="font-display text-xl text-ink">Section headings</h2>
+          <p className="mt-2 text-[15px] text-ink-muted">
+            The small eyebrow label and large heading shown above each section on the homepage.
+          </p>
+
+          <div className="mt-6 flex flex-col gap-6">
+            <Field label="About — eyebrow" value={form.aboutEyebrow} onChange={(v) => setField('aboutEyebrow', v)} />
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Field label="Skills — eyebrow" value={form.skillsEyebrow} onChange={(v) => setField('skillsEyebrow', v)} />
+              <Field label="Skills — heading" value={form.skillsTitle} onChange={(v) => setField('skillsTitle', v)} />
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Field
+                label="Experience — eyebrow"
+                value={form.experienceEyebrow}
+                onChange={(v) => setField('experienceEyebrow', v)}
+              />
+              <Field
+                label="Experience — heading"
+                value={form.experienceTitle}
+                onChange={(v) => setField('experienceTitle', v)}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Field
+                label="Projects — eyebrow"
+                value={form.projectsEyebrow}
+                onChange={(v) => setField('projectsEyebrow', v)}
+              />
+              <Field label="Projects — heading" value={form.projectsTitle} onChange={(v) => setField('projectsTitle', v)} />
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Field
+                label="Contact — eyebrow"
+                value={form.contactEyebrow}
+                onChange={(v) => setField('contactEyebrow', v)}
+              />
+              <Field label="Contact — heading" value={form.contactTitle} onChange={(v) => setField('contactTitle', v)} />
+            </div>
+          </div>
         </div>
 
         <div className="mt-4 flex items-center gap-5">

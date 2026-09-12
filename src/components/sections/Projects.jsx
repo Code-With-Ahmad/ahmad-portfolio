@@ -6,13 +6,15 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import Tag from '@/components/ui/Tag';
 import Container from '@/components/ui/Container';
 import { useFirestoreCollection } from '@/hooks/useFirestoreCollection';
-import { projectsApi } from '@/firebase/content';
+import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
+import { projectsApi, subscribeSite } from '@/firebase/content';
+import { cloudinaryUrl } from '@/lib/utils';
 
 function ProjectVisual({ project, className = '' }) {
   if (project.coverImageUrl) {
     return (
       <img
-        src={project.coverImageUrl}
+        src={cloudinaryUrl(project.coverImageUrl, 'q_auto,f_auto,w_900')}
         alt={project.title}
         className={`h-full w-full object-cover ${className}`}
       />
@@ -29,6 +31,7 @@ function ProjectVisual({ project, className = '' }) {
 
 export default function Projects() {
   const { data: projects } = useFirestoreCollection(projectsApi.subscribeAll);
+  const { data: site } = useFirestoreDoc(subscribeSite);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeProject = projects[activeIndex] || projects[0];
 
@@ -37,7 +40,7 @@ export default function Projects() {
   return (
     <section id="work" className="border-t border-border py-24 md:py-36">
       <Container>
-      <SectionHeading index="04" eyebrow="Selected Work" title="A few things I've built." />
+      {site.projectsTitle && <SectionHeading index="04" eyebrow={site.projectsEyebrow} title={site.projectsTitle} />}
 
       <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-7">

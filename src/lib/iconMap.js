@@ -38,6 +38,7 @@ import {
   SiLaravel,
   SiHtml5,
   SiCss,
+  SiBootstrap,
 } from 'react-icons/si';
 import { FiCode } from 'react-icons/fi';
 
@@ -81,6 +82,7 @@ export const ICON_MAP = {
   SiLaravel,
   SiHtml5,
   SiCss,
+  SiBootstrap,
 };
 
 export const ICON_NAMES = Object.keys(ICON_MAP);

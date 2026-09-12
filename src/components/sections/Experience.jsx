@@ -2,12 +2,14 @@ import { motion } from 'framer-motion';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Container from '@/components/ui/Container';
 import { useFirestoreCollection } from '@/hooks/useFirestoreCollection';
-import { experienceApi } from '@/firebase/content';
+import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
+import { experienceApi, subscribeSite } from '@/firebase/content';
 import { formatDateRange } from '@/lib/utils';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 export default function Experience() {
   const { data: experience } = useFirestoreCollection(experienceApi.subscribeAll);
+  const { data: site } = useFirestoreDoc(subscribeSite);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   if (experience.length === 0) return null;
@@ -15,7 +17,9 @@ export default function Experience() {
   return (
     <section id="experience" className="border-t border-border py-24 md:py-36">
       <Container>
-        <SectionHeading index="03" eyebrow="Experience" title="Where the work has happened." />
+        {site.experienceTitle && (
+          <SectionHeading index="03" eyebrow={site.experienceEyebrow} title={site.experienceTitle} />
+        )}
 
         <div className="mt-14">
           {experience.map((role, i) => (

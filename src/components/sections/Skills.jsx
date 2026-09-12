@@ -2,7 +2,8 @@ import { motion } from 'framer-motion';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Container from '@/components/ui/Container';
 import { useFirestoreCollection } from '@/hooks/useFirestoreCollection';
-import { skillsApi } from '@/firebase/content';
+import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
+import { skillsApi, subscribeSite } from '@/firebase/content';
 import { getIcon } from '@/lib/iconMap';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
@@ -18,6 +19,7 @@ function groupByCategory(skills) {
 
 export default function Skills() {
   const { data: skills } = useFirestoreCollection(skillsApi.subscribeAll);
+  const { data: site } = useFirestoreDoc(subscribeSite);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   if (skills.length === 0) return null;
@@ -27,7 +29,7 @@ export default function Skills() {
   return (
     <section id="skills" className="border-t border-border py-24 md:py-36">
       <Container>
-        <SectionHeading index="02" eyebrow="Skills" title="Tools I reach for, and why." />
+        {site.skillsTitle && <SectionHeading index="02" eyebrow={site.skillsEyebrow} title={site.skillsTitle} />}
 
         <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {groups.map(([category, items]) => (

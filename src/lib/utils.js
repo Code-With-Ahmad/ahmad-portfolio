@@ -29,6 +29,18 @@ export function slugify(text = '') {
     .replace(/^-+|-+$/g, '');
 }
 
+/**
+ * Requests an auto-format/auto-quality, width-capped version of a Cloudinary
+ * image instead of the original upload — the difference is often 4-5x
+ * smaller with no visible quality loss at display size, and avoids the
+ * "photo streams in progressively over several seconds" problem on
+ * unoptimized originals. No-op for any non-Cloudinary URL.
+ */
+export function cloudinaryUrl(url, transform = 'q_auto,f_auto') {
+  if (!url || !url.includes('/upload/')) return url;
+  return url.replace('/upload/', `/upload/${transform}/`);
+}
+
 export function getInitials(name = '') {
   return name
     .split(' ')
