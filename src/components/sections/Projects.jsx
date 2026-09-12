@@ -29,7 +29,7 @@ function ProjectVisual({ project, className = '' }) {
   );
 }
 
-export default function Projects() {
+export default function Projects({ number }) {
   const { data: projects } = useFirestoreCollection(projectsApi.subscribeAll);
   const { data: site } = useFirestoreDoc(subscribeSite);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -40,7 +40,7 @@ export default function Projects() {
   return (
     <section id="work" className="border-t border-border py-24 md:py-36">
       <Container>
-      {site.projectsTitle && <SectionHeading index="04" eyebrow={site.projectsEyebrow} title={site.projectsTitle} />}
+      {site.projectsTitle && <SectionHeading index={number} eyebrow={site.projectsEyebrow} title={site.projectsTitle} />}
 
       <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-7">

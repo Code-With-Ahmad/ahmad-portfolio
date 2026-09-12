@@ -11,14 +11,14 @@ const SOCIAL_ICONS = {
   x: FiTwitter,
 };
 
-export default function Contact() {
+export default function Contact({ number }) {
   const { data: site } = useFirestoreDoc(subscribeSite);
   const socials = Object.entries(site.socials || {}).filter(([, url]) => url);
 
   return (
     <section id="contact" className="border-t border-border py-24 md:py-36">
       <Container>
-      {site.contactTitle && <SectionHeading index="06" eyebrow={site.contactEyebrow} title={site.contactTitle} />}
+      {site.contactTitle && <SectionHeading index={number} eyebrow={site.contactEyebrow} title={site.contactTitle} />}
 
       <div className="mt-14 grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-8">
         <div className="flex flex-col justify-between gap-12 md:col-span-5">

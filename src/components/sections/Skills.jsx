@@ -17,7 +17,7 @@ function groupByCategory(skills) {
   return Array.from(groups.entries());
 }
 
-export default function Skills() {
+export default function Skills({ number }) {
   const { data: skills } = useFirestoreCollection(skillsApi.subscribeAll);
   const { data: site } = useFirestoreDoc(subscribeSite);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -29,7 +29,7 @@ export default function Skills() {
   return (
     <section id="skills" className="border-t border-border py-24 md:py-36">
       <Container>
-        {site.skillsTitle && <SectionHeading index="02" eyebrow={site.skillsEyebrow} title={site.skillsTitle} />}
+        {site.skillsTitle && <SectionHeading index={number} eyebrow={site.skillsEyebrow} title={site.skillsTitle} />}
 
         <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
           {groups.map(([category, items]) => (

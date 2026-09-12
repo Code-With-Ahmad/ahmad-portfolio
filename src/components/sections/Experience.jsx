@@ -7,7 +7,7 @@ import { experienceApi, subscribeSite } from '@/firebase/content';
 import { formatDateRange } from '@/lib/utils';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
-export default function Experience() {
+export default function Experience({ number }) {
   const { data: experience } = useFirestoreCollection(experienceApi.subscribeAll);
   const { data: site } = useFirestoreDoc(subscribeSite);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -18,7 +18,7 @@ export default function Experience() {
     <section id="experience" className="border-t border-border py-24 md:py-36">
       <Container>
         {site.experienceTitle && (
-          <SectionHeading index="03" eyebrow={site.experienceEyebrow} title={site.experienceTitle} />
+          <SectionHeading index={number} eyebrow={site.experienceEyebrow} title={site.experienceTitle} />
         )}
 
         <div className="mt-14">

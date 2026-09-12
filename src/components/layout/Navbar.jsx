@@ -109,6 +109,8 @@ export default function Navbar() {
             <a
               href={site.resumeUrl}
               download={site.resumeFileName || 'resume.pdf'}
+              target="_blank"
+              rel="noreferrer"
               className="group inline-flex items-center gap-1.5 text-[13px] uppercase tracking-[0.12em] text-ink-muted transition-colors hover:text-ink"
             >
               Resume
@@ -164,6 +166,8 @@ export default function Navbar() {
               <a
                 href={site.resumeUrl}
                 download={site.resumeFileName || 'resume.pdf'}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center gap-2 self-start text-sm uppercase tracking-[0.12em] text-accent"
               >
                 Download Resume

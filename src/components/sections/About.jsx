@@ -5,7 +5,7 @@ import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
 import { useFirestoreCollection } from '@/hooks/useFirestoreCollection';
 import { subscribeAbout, subscribeSite, experienceApi, projectsApi, skillsApi } from '@/firebase/content';
 
-export default function About() {
+export default function About({ number }) {
   const { data: about } = useFirestoreDoc(subscribeAbout);
   const { data: site } = useFirestoreDoc(subscribeSite);
   const { data: experience } = useFirestoreCollection(experienceApi.subscribeAll);
@@ -24,7 +24,7 @@ export default function About() {
   return (
     <section id="about" className="border-t border-border py-24 md:py-36">
       <Container>
-        {about.heading && <SectionHeading index="01" eyebrow={site.aboutEyebrow} title={about.heading} />}
+        {about.heading && <SectionHeading index={number} eyebrow={site.aboutEyebrow} title={about.heading} />}
 
         <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
           <div className="flex flex-row gap-8 md:col-span-3 md:flex-col md:gap-10">

@@ -18,6 +18,8 @@ export default function ResumeCTA() {
           <a
             href={site.resumeUrl}
             download={site.resumeFileName || 'resume.pdf'}
+            target="_blank"
+            rel="noreferrer"
             data-cursor-hover
             className="group inline-flex shrink-0 items-center gap-3 bg-accent px-7 py-4 text-[15px] font-medium text-accent-ink transition-transform hover:-translate-y-0.5"
           >
@@ -26,7 +28,7 @@ export default function ResumeCTA() {
           </a>
         ) : (
           <span className="shrink-0 border border-border px-7 py-4 text-[13px] uppercase tracking-[0.12em] text-ink-muted">
-            Résumé coming soon
+            Resume coming soon
           </span>
         )}
       </Container>

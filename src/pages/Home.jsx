@@ -10,11 +10,41 @@ import Contact from '@/components/sections/Contact';
 import Seo from '@/components/layout/Seo';
 import { scrollToId } from '@/lib/utils';
 import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
-import { subscribeSite } from '@/firebase/content';
+import { useFirestoreCollection } from '@/hooks/useFirestoreCollection';
+import { subscribeSite, subscribeAbout, skillsApi, experienceApi, projectsApi } from '@/firebase/content';
+
+// Section numbers ("01", "02", ...) are computed once here, in a single
+// synchronous pass, rather than having each section increment a shared
+// counter independently — sections subscribe to Firestore on their own and
+// re-render at different times, so a shared mutable counter would get
+// incremented redundantly every time any single section's data changed.
+function useSectionNumbers() {
+  const { data: about } = useFirestoreDoc(subscribeAbout);
+  const { data: skills } = useFirestoreCollection(skillsApi.subscribeAll);
+  const { data: experience } = useFirestoreCollection(experienceApi.subscribeAll);
+  const { data: projects } = useFirestoreCollection(projectsApi.subscribeAll);
+
+  const visibility = {
+    hero: true,
+    about: Boolean(about.heading) || (about.bio || []).length > 0,
+    skills: skills.length > 0,
+    experience: experience.length > 0,
+    projects: projects.length > 0,
+    contact: true,
+  };
+
+  let n = 0;
+  const numbers = {};
+  for (const key of ['hero', 'about', 'skills', 'experience', 'projects', 'contact']) {
+    numbers[key] = visibility[key] ? String(++n).padStart(2, '0') : null;
+  }
+  return numbers;
+}
 
 export default function Home() {
   const location = useLocation();
   const { data: site } = useFirestoreDoc(subscribeSite);
+  const numbers = useSectionNumbers();
 
   useEffect(() => {
     const targetId = location.state?.scrollTo || (location.hash ? location.hash.slice(1) : null);
@@ -28,13 +58,13 @@ export default function Home() {
   return (
     <>
       <Seo title={title} description={site.heroDescription} image={site.logoUrl} path="/" />
-      <Hero />
-      <About />
-      <Skills />
-      <Experience />
-      <Projects />
+      <Hero number={numbers.hero} />
+      <About number={numbers.about} />
+      <Skills number={numbers.skills} />
+      <Experience number={numbers.experience} />
+      <Projects number={numbers.projects} />
       <ResumeCTA />
-      <Contact />
+      <Contact number={numbers.contact} />
     </>
   );
 }

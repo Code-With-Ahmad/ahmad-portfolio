@@ -7,13 +7,13 @@ import { subscribeSite, subscribeAbout } from '@/firebase/content';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { scrollToId, cloudinaryUrl } from '@/lib/utils';
 
-export default function Hero() {
+export default function Hero({ number }) {
   const { data: site } = useFirestoreDoc(subscribeSite);
   const { data: about } = useFirestoreDoc(subscribeAbout);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
-    <section id="top" className="relative flex min-h-[100svh] flex-col">
+    <section id="top" className="relative flex flex-col md:min-h-[100svh]">
       <Container
         className="flex flex-1 flex-col pb-8"
         style={{ paddingTop: 'calc(var(--nav-h, 96px) + 2rem)' }}
@@ -22,24 +22,28 @@ export default function Hero() {
           initial={prefersReducedMotion ? false : { opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex items-start justify-between text-[13px] uppercase tracking-[0.14em] text-ink-muted"
+          className="flex flex-col gap-3 text-[13px] uppercase tracking-[0.14em] text-ink-muted sm:flex-row sm:items-start sm:justify-between sm:gap-6"
         >
-          <span>{site.title}</span>
+          <div className="flex items-center gap-3">
+            <span className="font-display text-sm italic">{number}</span>
+            <span className="h-px w-8 flex-none bg-border" />
+            <span>{site.title}</span>
+          </div>
           {site.availability && (
-            <span className="hidden items-center gap-2 sm:flex">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="flex items-center gap-2 pl-11 sm:pl-0">
+              <span className="h-1.5 w-1.5 flex-none rounded-full bg-accent" />
               {site.availability}
             </span>
           )}
         </motion.div>
 
-        <div className="my-auto mb-12 grid grid-cols-1 gap-10 py-10 md:mb-8 md:grid-cols-12 md:items-center md:gap-10 md:py-0">
+        <div className="mt-10 grid grid-cols-1 gap-10 sm:mt-14 md:mt-14 md:grid-cols-12 md:items-center md:gap-10">
           <div className="md:col-span-8">
             {site.tagline && (
               <TextReveal
                 as="h1"
                 stagger={0.03}
-                className="font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[1.15] tracking-tight text-ink"
+                className="font-display text-[clamp(2.75rem,6.2vw,6.5rem)] leading-[1.15] tracking-tight text-ink"
               >
                 {site.tagline}
               </TextReveal>
@@ -76,9 +80,9 @@ export default function Hero() {
               initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="hidden md:col-span-4 md:block"
+              className="hidden md:col-span-4 md:block md:border-l md:border-border md:pl-10"
             >
-              <div className="aspect-[3/4] w-full overflow-hidden border border-border">
+              <div className="aspect-[3/4] w-full overflow-hidden border border-border md:ml-auto md:w-[min(100%,calc(75vh-232px))]">
                 <img
                   src={cloudinaryUrl(about.profileImageUrl, 'q_auto,f_auto,c_fill,g_face,w_700,h_934')}
                   alt={site.name || ''}
@@ -93,7 +97,7 @@ export default function Hero() {
           initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex items-center justify-between pr-20 text-[13px] uppercase tracking-[0.14em] text-ink-muted sm:pr-0"
+          className="mt-auto flex items-center justify-between pr-20 pt-10 text-[13px] uppercase tracking-[0.14em] text-ink-muted"
         >
           <span>{site.location}</span>
           <button
