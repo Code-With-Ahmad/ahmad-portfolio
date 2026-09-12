@@ -39,8 +39,22 @@ import {
   SiHtml5,
   SiCss,
   SiBootstrap,
+  SiGreensock,
+  SiFramer,
+  SiReactrouter,
+  SiReacthookform,
+  SiFormik,
+  SiAxios,
+  SiSocketdotio,
+  SiJsonwebtokens,
+  SiGithubactions,
+  SiPayloadcms,
+  SiStyledcomponents,
+  SiCssmodules,
+  SiLottiefiles,
 } from 'react-icons/si';
 import { FiCode } from 'react-icons/fi';
+import { FaAws } from 'react-icons/fa6';
 
 export const ICON_MAP = {
   SiJavascript,
@@ -83,6 +97,20 @@ export const ICON_MAP = {
   SiHtml5,
   SiCss,
   SiBootstrap,
+  SiGreensock,
+  SiFramer,
+  SiReactrouter,
+  SiReacthookform,
+  SiFormik,
+  SiAxios,
+  SiSocketdotio,
+  SiJsonwebtokens,
+  SiGithubactions,
+  SiPayloadcms,
+  SiStyledcomponents,
+  SiCssmodules,
+  SiLottiefiles,
+  FaAws,
 };
 
 export const ICON_NAMES = Object.keys(ICON_MAP);

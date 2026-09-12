@@ -23,7 +23,7 @@ export default function IconPicker({ value, onChange, className = '' }) {
         className="flex w-full items-center gap-2 border-b border-border py-1.5 text-[14px] text-ink"
       >
         <Icon size={16} />
-        <span className="flex-1 text-left">{value.replace(/^Si/, '')}</span>
+        <span className="flex-1 text-left">{value.replace(/^(Si|Fa)/, '')}</span>
         <FiChevronDown size={13} className="text-ink-muted" />
       </button>
 
@@ -45,7 +45,7 @@ export default function IconPicker({ value, onChange, className = '' }) {
                 }`}
               >
                 <OptionIcon size={15} />
-                {name.replace(/^Si/, '')}
+                {name.replace(/^(Si|Fa)/, '')}
               </button>
             );
           })}
