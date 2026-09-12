@@ -19,9 +19,9 @@ export default function ResumeCTA() {
             href={site.resumeUrl}
             download={site.resumeFileName || 'resume.pdf'}
             data-cursor-hover
-            className="group inline-flex shrink-0 items-center gap-3 bg-accent px-7 py-4 text-[13px] font-medium uppercase tracking-[0.12em] text-accent-ink transition-transform hover:-translate-y-0.5"
+            className="group inline-flex shrink-0 items-center gap-3 bg-accent px-7 py-4 text-[15px] font-medium text-accent-ink transition-transform hover:-translate-y-0.5"
           >
-            Download Résumé
+            Download Resume
             <FiArrowDownRight className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
           </a>
         ) : (
