@@ -29,7 +29,7 @@ export default function Experience({ number }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="group -mx-6 border-t border-border px-6 py-8 transition-colors hover:bg-bg-elevated last:border-b md:-mx-10 md:grid md:grid-cols-12 md:items-baseline md:gap-6 md:px-10"
+              className="group -mx-6 border-t border-border px-6 py-8 transition-colors hover:bg-bg-elevated md:-mx-10 md:grid md:grid-cols-12 md:items-baseline md:gap-6 md:px-10"
             >
               <span className="text-[13px] uppercase tracking-[0.1em] text-ink-muted md:col-span-2">
                 {formatDateRange(role.startDate, role.endDate)}

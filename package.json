@@ -9,7 +9,9 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "seed:skills": "node scripts/seed-skills.js",
-    "seed:experience": "node scripts/seed-experience.js"
+    "seed:experience": "node scripts/seed-experience.js",
+    "seed:projects": "node scripts/seed-projects.js",
+    "seed:headings": "node scripts/seed-section-headings.js"
   },
   "dependencies": {
     "cloudinary": "^2.11.0",
