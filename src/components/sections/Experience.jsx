@@ -3,13 +3,14 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import Container from '@/components/ui/Container';
 import { useFirestoreCollection } from '@/hooks/useFirestoreCollection';
 import { experienceApi } from '@/firebase/content';
-import { placeholderExperience } from '@/lib/placeholderContent';
 import { formatDateRange } from '@/lib/utils';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 export default function Experience() {
-  const { data: experience } = useFirestoreCollection(experienceApi.subscribeAll, placeholderExperience);
+  const { data: experience } = useFirestoreCollection(experienceApi.subscribeAll);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  if (experience.length === 0) return null;
 
   return (
     <section id="experience" className="border-t border-border py-24 md:py-36">

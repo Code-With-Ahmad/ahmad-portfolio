@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
 import { subscribeSite } from '@/firebase/content';
-import { placeholderSite } from '@/lib/placeholderContent';
 
 const SCRIPT_ID = 'person-schema';
 
 export default function PersonSchema() {
-  const { data: site } = useFirestoreDoc(subscribeSite, placeholderSite);
+  const { data: site } = useFirestoreDoc(subscribeSite);
 
   useEffect(() => {
+    if (!site.name) return;
+
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'Person',

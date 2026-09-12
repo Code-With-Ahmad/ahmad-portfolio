@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FiArrowLeft, FiArrowUpRight } from 'react-icons/fi';
 import { getProjectBySlug } from '@/firebase/content';
-import { placeholderProjects } from '@/lib/placeholderContent';
 import Tag from '@/components/ui/Tag';
 import Loader from '@/components/ui/Loader';
 import Seo from '@/components/layout/Seo';
@@ -19,7 +18,7 @@ export default function ProjectDetail() {
 
     getProjectBySlug(slug).then((result) => {
       if (!active) return;
-      setProject(result || placeholderProjects.find((p) => p.slug === slug) || null);
+      setProject(result || null);
     });
 
     return () => {

@@ -3,7 +3,6 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import Container from '@/components/ui/Container';
 import { useFirestoreCollection } from '@/hooks/useFirestoreCollection';
 import { skillsApi } from '@/firebase/content';
-import { placeholderSkills } from '@/lib/placeholderContent';
 import { getIcon } from '@/lib/iconMap';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
@@ -18,8 +17,11 @@ function groupByCategory(skills) {
 }
 
 export default function Skills() {
-  const { data: skills } = useFirestoreCollection(skillsApi.subscribeAll, placeholderSkills);
+  const { data: skills } = useFirestoreCollection(skillsApi.subscribeAll);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  if (skills.length === 0) return null;
+
   const groups = groupByCategory(skills);
 
   return (

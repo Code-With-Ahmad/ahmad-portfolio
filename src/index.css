@@ -82,7 +82,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *:not(.Toastify__progress-bar), *:not(.Toastify__progress-bar)::before, *:not(.Toastify__progress-bar)::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.001ms !important;
@@ -102,22 +102,16 @@
   background-color: var(--color-bg-elevated) !important;
   color: var(--color-ink) !important;
   font-family: var(--font-sans) !important;
-  padding: 0.5rem 0.75rem !important;
+  padding: 0.75rem 0.9rem !important;
   min-height: unset !important;
+  overflow: hidden !important;
 }
 
 .Toastify__toast-body {
   font-size: 14px !important;
   padding: 0.25rem 0.25rem !important;
   color: var(--color-ink) !important;
-}
-
-.Toastify__toast--success {
-  border-left: 3px solid var(--color-accent) !important;
-}
-
-.Toastify__toast--error {
-  border-left: 3px solid var(--color-error) !important;
+  margin: 0 !important;
 }
 
 .Toastify__toast-icon {
@@ -130,8 +124,27 @@
   align-self: center !important;
 }
 
+/* The progress bar is the only color signal for success/error — no
+   competing colored border, so the one accent that's there reads clearly. */
 .Toastify__progress-bar--wrp {
-  display: none !important;
+  height: 3px !important;
+}
+
+.Toastify__progress-bar--bg {
+  background-color: var(--color-border) !important;
+  opacity: 1 !important;
+}
+
+.Toastify__progress-bar {
+  height: 3px !important;
+}
+
+.Toastify__progress-bar--success {
+  background: var(--color-accent) !important;
+}
+
+.Toastify__progress-bar--error {
+  background: var(--color-error) !important;
 }
 
 .Toastify__close-button:hover {

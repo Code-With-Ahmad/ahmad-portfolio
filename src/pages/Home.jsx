@@ -11,11 +11,10 @@ import Seo from '@/components/layout/Seo';
 import { scrollToId } from '@/lib/utils';
 import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
 import { subscribeSite } from '@/firebase/content';
-import { placeholderSite } from '@/lib/placeholderContent';
 
 export default function Home() {
   const location = useLocation();
-  const { data: site } = useFirestoreDoc(subscribeSite, placeholderSite);
+  const { data: site } = useFirestoreDoc(subscribeSite);
 
   useEffect(() => {
     const targetId = location.state?.scrollTo || (location.hash ? location.hash.slice(1) : null);
@@ -24,14 +23,11 @@ export default function Home() {
     }
   }, [location.state, location.hash]);
 
+  const title = [site.name, site.title].filter(Boolean).join(' — ') || 'Portfolio';
+
   return (
     <>
-      <Seo
-        title={`${site.name} — ${site.title}`}
-        description={site.heroDescription}
-        image={site.logoUrl}
-        path="/"
-      />
+      <Seo title={title} description={site.heroDescription} image={site.logoUrl} path="/" />
       <Hero />
       <About />
       <Skills />

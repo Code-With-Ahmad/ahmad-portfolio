@@ -5,7 +5,6 @@ import { FiArrowDownRight, FiMenu, FiX } from 'react-icons/fi';
 import ThemeToggle from './ThemeToggle';
 import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
 import { subscribeSite } from '@/firebase/content';
-import { placeholderSite } from '@/lib/placeholderContent';
 import { scrollToId, getInitials } from '@/lib/utils';
 
 const NAV_ITEMS = [
@@ -17,7 +16,7 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
-  const { data: site } = useFirestoreDoc(subscribeSite, placeholderSite);
+  const { data: site } = useFirestoreDoc(subscribeSite);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -85,9 +84,9 @@ export default function Navbar() {
           aria-label="Back to top"
         >
           {site.logoUrl ? (
-            <img src={site.logoUrl} alt={site.name} className="h-16 w-auto object-contain md:h-20" />
+            <img src={site.logoUrl} alt={site.name || ''} className="h-16 w-auto object-contain md:h-20" />
           ) : (
-            getInitials(site.name) || 'AN'
+            getInitials(site.name)
           )}
         </a>
 

@@ -3,10 +3,9 @@ import TextReveal from '@/components/ui/TextReveal';
 import Container from '@/components/ui/Container';
 import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
 import { subscribeSite } from '@/firebase/content';
-import { placeholderSite } from '@/lib/placeholderContent';
 
 export default function ResumeCTA() {
-  const { data: site } = useFirestoreDoc(subscribeSite, placeholderSite);
+  const { data: site } = useFirestoreDoc(subscribeSite);
 
   return (
     <section className="border-t border-border py-20 md:py-28">

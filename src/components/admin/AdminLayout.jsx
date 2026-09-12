@@ -15,7 +15,7 @@ const NAV_ITEMS = [
 export default function AdminLayout({ children }) {
   return (
     <div className="flex min-h-screen flex-col bg-bg text-ink md:flex-row">
-      <aside className="flex shrink-0 flex-col justify-between border-b border-border p-6 md:w-60 md:border-b-0 md:border-r md:p-8">
+      <aside className="flex shrink-0 flex-col justify-between border-b border-border p-6 md:fixed md:inset-y-0 md:left-0 md:w-60 md:overflow-y-auto md:border-b-0 md:border-r md:p-8">
         <div>
           <p className="font-display text-xl text-ink">Admin</p>
           <nav className="mt-8 flex flex-row flex-wrap gap-x-5 gap-y-2 md:flex-col md:gap-2">
@@ -55,7 +55,7 @@ export default function AdminLayout({ children }) {
         </div>
       </aside>
 
-      <main className="flex-1 px-6 py-10 md:px-12 md:py-14">
+      <main className="flex-1 px-6 py-10 md:px-12 md:py-14 md:ml-60">
         <div className="mx-auto max-w-3xl">{children}</div>
       </main>
     </div>

@@ -4,7 +4,6 @@ import { FiArrowUp } from 'react-icons/fi';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
 import { subscribeSite } from '@/firebase/content';
-import { placeholderSite } from '@/lib/placeholderContent';
 import { getWhatsAppLink, scrollToId } from '@/lib/utils';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
@@ -12,7 +11,7 @@ const MARGIN = 16; // matches bottom-6/right-6 (1.5rem) minus a touch, keeps a g
 const SCROLL_THRESHOLD = 500; // px scrolled before the back-to-top button appears
 
 export default function FloatingActions() {
-  const { data: site } = useFirestoreDoc(subscribeSite, placeholderSite);
+  const { data: site } = useFirestoreDoc(subscribeSite);
   const prefersReducedMotion = usePrefersReducedMotion();
   const whatsappLink = getWhatsAppLink(site.whatsapp);
   const [lift, setLift] = useState(0);

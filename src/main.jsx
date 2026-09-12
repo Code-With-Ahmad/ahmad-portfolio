@@ -14,7 +14,12 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
         <ThemeProvider>
           <App />
-          <ToastContainer position="bottom-right" hideProgressBar closeOnClick pauseOnHover />
+          <ToastContainer
+            position="bottom-right"
+            closeOnClick
+            pauseOnHover
+            pauseOnFocusLoss={false}
+          />
         </ThemeProvider>
       </BrowserRouter>
     </ErrorBoundary>

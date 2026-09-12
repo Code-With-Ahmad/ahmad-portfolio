@@ -4,13 +4,12 @@ import TextReveal from '@/components/ui/TextReveal';
 import Container from '@/components/ui/Container';
 import { useFirestoreDoc } from '@/hooks/useFirestoreDoc';
 import { subscribeSite, subscribeAbout } from '@/firebase/content';
-import { placeholderSite, placeholderAbout } from '@/lib/placeholderContent';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { scrollToId } from '@/lib/utils';
 
 export default function Hero() {
-  const { data: site } = useFirestoreDoc(subscribeSite, placeholderSite);
-  const { data: about } = useFirestoreDoc(subscribeAbout, placeholderAbout);
+  const { data: site } = useFirestoreDoc(subscribeSite);
+  const { data: about } = useFirestoreDoc(subscribeAbout);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
@@ -35,13 +34,15 @@ export default function Hero() {
         </motion.div>
 
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-12 md:items-end md:gap-6 md:py-0">
-          <TextReveal
-            as="h1"
-            stagger={0.03}
-            className="font-display text-[13vw] leading-[0.98] tracking-tight text-ink md:col-span-9 md:text-[6.4vw]"
-          >
-            {site.tagline}
-          </TextReveal>
+          {site.tagline && (
+            <TextReveal
+              as="h1"
+              stagger={0.03}
+              className="font-display text-[13vw] leading-[0.98] tracking-tight text-ink md:col-span-9 md:text-[6.4vw]"
+            >
+              {site.tagline}
+            </TextReveal>
+          )}
 
           <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
@@ -51,11 +52,13 @@ export default function Hero() {
           >
             {about.profileImageUrl && (
               <div className="aspect-[4/5] w-full max-w-[180px] overflow-hidden border border-border">
-                <img src={about.profileImageUrl} alt={site.name} className="h-full w-full object-cover" />
+                <img src={about.profileImageUrl} alt={site.name || ''} className="h-full w-full object-cover" />
               </div>
             )}
-            <p className="max-w-xs text-[15px] leading-relaxed text-ink-muted">{site.heroDescription}</p>
-            <span className="font-display text-lg italic text-ink-muted">— {site.name}</span>
+            {site.heroDescription && (
+              <p className="max-w-xs text-[15px] leading-relaxed text-ink-muted">{site.heroDescription}</p>
+            )}
+            {site.name && <span className="font-display text-lg italic text-ink-muted">— {site.name}</span>}
           </motion.div>
         </div>
 

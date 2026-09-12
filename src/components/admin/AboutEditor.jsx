@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import { getDocById, updateAbout } from '@/firebase/content';
-import { placeholderAbout } from '@/lib/placeholderContent';
 import ImageUploadField from './ImageUploadField';
 import Loader from '@/components/ui/Loader';
 import { notify } from '@/lib/toast';
@@ -10,13 +9,17 @@ const FIELD_CLASS =
   'border-b border-border bg-transparent py-2 text-[15px] text-ink outline-none transition-colors focus:border-accent';
 const LABEL_CLASS = 'text-[13px] uppercase tracking-[0.1em] text-ink-muted';
 
+// Minimal empty shape so controlled inputs never see `undefined` on a fresh
+// doc — not placeholder copy, just structurally-safe blank values.
+const emptyAboutForm = { heading: '', bio: [''], profileImageUrl: '' };
+
 export default function AboutEditor() {
   const [form, setForm] = useState(null);
   const [status, setStatus] = useState('idle');
 
   useEffect(() => {
     getDocById('content', 'about').then((doc) => {
-      const merged = { ...placeholderAbout, ...doc };
+      const merged = { ...emptyAboutForm, ...doc };
       setForm({ ...merged, bio: merged.bio?.length ? merged.bio : [''] });
     });
   }, []);

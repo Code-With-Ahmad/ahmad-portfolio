@@ -7,7 +7,6 @@ import Tag from '@/components/ui/Tag';
 import Container from '@/components/ui/Container';
 import { useFirestoreCollection } from '@/hooks/useFirestoreCollection';
 import { projectsApi } from '@/firebase/content';
-import { placeholderProjects } from '@/lib/placeholderContent';
 
 function ProjectVisual({ project, className = '' }) {
   if (project.coverImageUrl) {
@@ -29,9 +28,11 @@ function ProjectVisual({ project, className = '' }) {
 }
 
 export default function Projects() {
-  const { data: projects } = useFirestoreCollection(projectsApi.subscribeAll, placeholderProjects);
+  const { data: projects } = useFirestoreCollection(projectsApi.subscribeAll);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeProject = projects[activeIndex] || projects[0];
+
+  if (projects.length === 0) return null;
 
   return (
     <section id="work" className="border-t border-border py-24 md:py-36">

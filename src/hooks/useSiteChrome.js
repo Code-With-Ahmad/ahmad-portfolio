@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useFirestoreDoc } from './useFirestoreDoc';
 import { subscribeSite } from '@/firebase/content';
-import { placeholderSite } from '@/lib/placeholderContent';
 import { useTheme } from '@/context/ThemeContext';
 
 const THEME_COLORS = { dark: '#0b0b0c', light: '#f5f2ea' };
@@ -12,7 +11,7 @@ const THEME_COLORS = { dark: '#0b0b0c', light: '#f5f2ea' };
  * mobile theme-color meta tag follows the active theme.
  */
 export function useSiteChrome() {
-  const { data: site } = useFirestoreDoc(subscribeSite, placeholderSite);
+  const { data: site, loading } = useFirestoreDoc(subscribeSite);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -28,5 +27,5 @@ export function useSiteChrome() {
     if (meta) meta.content = THEME_COLORS[theme] || THEME_COLORS.dark;
   }, [theme]);
 
-  return site;
+  return { site, loading };
 }

@@ -1,9 +1,24 @@
 import { useEffect, useState } from 'react';
 import { getDocById, updateSite } from '@/firebase/content';
-import { placeholderSite } from '@/lib/placeholderContent';
 import ImageUploadField from './ImageUploadField';
 import Loader from '@/components/ui/Loader';
 import { notify } from '@/lib/toast';
+
+// Minimal empty shape so controlled inputs never see `undefined` on a fresh
+// doc — not placeholder copy, just structurally-safe blank values.
+const emptySiteForm = {
+  name: '',
+  title: '',
+  tagline: '',
+  heroDescription: '',
+  availability: '',
+  email: '',
+  location: '',
+  whatsapp: '',
+  logoUrl: '',
+  faviconUrl: '',
+  socials: { github: '', linkedin: '', x: '' },
+};
 
 const FIELD_CLASS =
   'border-b border-border bg-transparent py-2 text-[15px] text-ink outline-none transition-colors focus:border-accent';
@@ -33,7 +48,7 @@ export default function SiteInfoEditor() {
 
   useEffect(() => {
     getDocById('content', 'site').then((doc) => {
-      setForm({ ...placeholderSite, ...doc });
+      setForm({ ...emptySiteForm, ...doc });
     });
   }, []);
 

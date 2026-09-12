@@ -3,9 +3,10 @@ import { toast } from 'react-toastify';
 const baseOptions = {
   position: 'bottom-right',
   autoClose: 4000,
-  hideProgressBar: true,
+  hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
+  pauseOnFocusLoss: false,
 };
 
 export const notify = {

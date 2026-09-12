@@ -11,6 +11,7 @@ import PersonSchema from '@/components/layout/PersonSchema';
 import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
 import { useSiteChrome } from '@/hooks/useSiteChrome';
+import Loader from '@/components/ui/Loader';
 
 const ProjectDetail = lazy(() => import('@/pages/ProjectDetail'));
 const AdminRoot = lazy(() => import('@/pages/AdminRoot'));
@@ -20,7 +21,11 @@ function RouteFallback() {
 }
 
 function PublicLayout({ children }) {
-  useSiteChrome();
+  const { loading } = useSiteChrome();
+
+  if (loading) {
+    return <Loader className="min-h-screen bg-bg" />;
+  }
 
   return (
     <>
