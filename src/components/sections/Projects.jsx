@@ -51,7 +51,7 @@ export default function Projects({ number }) {
               onMouseEnter={() => setActiveIndex(i)}
               onFocus={() => setActiveIndex(i)}
               data-cursor-hover
-              className="group block border-t border-border py-7 last:border-b md:py-9"
+              className="group block border-t border-border py-7 md:py-9"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
