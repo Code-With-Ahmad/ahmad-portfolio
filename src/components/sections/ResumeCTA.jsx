@@ -10,7 +10,7 @@ export default function ResumeCTA() {
   return (
     <section className="border-t border-border py-20 md:py-28">
       <Container className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
-        <TextReveal as="h2" className="max-w-xl font-display text-4xl leading-[1.05] text-ink md:text-5xl">
+        <TextReveal as="h2" className="max-w-xl font-display text-4xl leading-[1.15] text-ink md:text-5xl">
           Want the longer version, on paper?
         </TextReveal>
 

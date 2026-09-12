@@ -10,7 +10,7 @@ export default function SectionHeading({ index, eyebrow, title, className = '' }
       </div>
       <TextReveal
         as="h2"
-        className="max-w-3xl font-display text-4xl leading-[1.05] text-ink sm:text-5xl md:text-6xl"
+        className="max-w-3xl font-display text-4xl leading-[1.15] text-ink sm:text-5xl md:text-6xl"
       >
         {title}
       </TextReveal>

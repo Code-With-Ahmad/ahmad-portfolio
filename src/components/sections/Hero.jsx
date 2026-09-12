@@ -39,7 +39,7 @@ export default function Hero() {
               <TextReveal
                 as="h1"
                 stagger={0.03}
-                className="font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[1.02] tracking-tight text-ink"
+                className="font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[1.15] tracking-tight text-ink"
               >
                 {site.tagline}
               </TextReveal>
